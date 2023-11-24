@@ -1,0 +1,49 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+dependencies {
+  implementation project(':library')
+
+  implementation 'androidx.appcompat:appcompat:1.6.1'
+
+  implementation 'androidx.activity:activity-compose:1.8.1'
+  implementation "androidx.compose.material:material:1.5.4"
+  debugImplementation "androidx.compose.ui:ui-tooling:1.5.4"
+
+  implementation "androidx.navigation:navigation-compose:2.7.5"
+  implementation "com.google.accompanist:accompanist-navigation-animation:0.32.0"
+}
+
+android {
+  namespace 'com.devbrackets.android.annoresdemo'
+
+  compileSdk 34
+
+  defaultConfig {
+    applicationId "com.devbrackets.android.annoresdemo"
+    minSdkVersion 21
+    targetSdkVersion 34
+    versionCode 1
+    versionName "1.0"
+  }
+
+  kotlinOptions {
+    jvmTarget = JavaVersion.VERSION_1_8
+  }
+
+  buildFeatures {
+    compose true
+  }
+
+  composeOptions {
+    kotlinCompilerExtensionVersion '1.5.4'
+  }
+
+  sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
+  }
+
+  lint {
+    abortOnError false
+  }
+}

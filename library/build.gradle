@@ -1,0 +1,53 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+afterEvaluate {
+  apply from: '../gradle/release/publish.gradle'
+}
+
+dependencies {
+  // Kotlin
+  api "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+
+  // Compose
+  api "androidx.compose.ui:ui:1.5.4"
+
+  // Tests
+  testImplementation "junit:junit:4.13.2"
+  testImplementation "org.robolectric:robolectric:4.9.2"
+}
+
+android {
+  namespace 'com.devbrackets.android.annores'
+
+  compileSdk 34
+  defaultConfig {
+    minSdkVersion 21
+    targetSdkVersion 34
+  }
+
+  kotlinOptions {
+    jvmTarget = JavaVersion.VERSION_1_8
+  }
+
+  buildFeatures {
+    compose true
+  }
+
+  composeOptions {
+    kotlinCompilerExtensionVersion '1.5.4'
+  }
+
+  sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
+  }
+
+  lint {
+    abortOnError false
+  }
+}
+
+// Disables javadoc because it fails on kotlin files
+tasks.withType(Javadoc).all {
+  enabled = false
+}
