@@ -1,3 +1,5 @@
+![Maven Central](https://img.shields.io/maven-central/v/com.devbrackets.android/annores)
+
 Annores
 ============
 Annores, from Annotated Resource, provides the ability to retrieve AnnotatedStrings from
@@ -65,5 +67,5 @@ Attribution
 
  [Kotlin]: https://kotlinlang.org/
  [Compose]: https://developer.android.com/jetpack/compose
- [Maven Central]: https://s01.oss.sonatype.org/#nexus-search;quick~com.devbrackets.android.playlistcore
+ [Maven Central]: https://search.maven.org/artifact/com.devbrackets.android/annores
  [Apache 2.0]: https://opensource.org/licenses/Apache-2.0
