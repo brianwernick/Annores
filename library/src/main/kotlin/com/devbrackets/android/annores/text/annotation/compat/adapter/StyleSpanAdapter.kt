@@ -31,8 +31,7 @@ object StyleSpanAdapter: AbstractSpanAdapter<StyleSpan>(StyleSpan::class) {
         Annotation(FontStyleAnnotationHandler.KEY, FontStyleAnnotationHandler.VALUE_ITALIC)
       )
       Typeface.BOLD_ITALIC -> listOf(
-        Annotation(FontStyleAnnotationHandler.KEY, FontStyleAnnotationHandler.VALUE_BOLD),
-        Annotation(FontStyleAnnotationHandler.KEY, FontStyleAnnotationHandler.VALUE_ITALIC)
+        Annotation(FontStyleAnnotationHandler.KEY, "${FontStyleAnnotationHandler.VALUE_BOLD},${FontStyleAnnotationHandler.VALUE_ITALIC}"),
       )
       else -> return emptyList()
     }.map { annotation ->
