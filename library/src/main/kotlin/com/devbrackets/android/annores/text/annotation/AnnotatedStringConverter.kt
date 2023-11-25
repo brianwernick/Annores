@@ -7,6 +7,7 @@ import androidx.compose.ui.text.AnnotatedString
 import com.devbrackets.android.annores.text.annotation.compat.adapter.AnnotationSpanAdapter
 import com.devbrackets.android.annores.text.annotation.compat.adapter.SpanAdapter
 import com.devbrackets.android.annores.text.annotation.compat.adapter.StyleSpanAdapter
+import com.devbrackets.android.annores.text.annotation.compat.adapter.UnderlineSpanAdapter
 import com.devbrackets.android.annores.text.annotation.handler.AnnotationHandler
 import com.devbrackets.android.annores.text.annotation.handler.FontStyleAnnotationHandler
 
@@ -16,7 +17,8 @@ import com.devbrackets.android.annores.text.annotation.handler.FontStyleAnnotati
 object AnnotatedStringConverter {
   val defaultSpanAdapters = listOf(
     StyleSpanAdapter,
-    AnnotationSpanAdapter
+    AnnotationSpanAdapter,
+    UnderlineSpanAdapter
   )
 
   val defaultAnnotationHandlers = listOf(
