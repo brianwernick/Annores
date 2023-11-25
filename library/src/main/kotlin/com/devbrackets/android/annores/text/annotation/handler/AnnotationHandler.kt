@@ -12,10 +12,8 @@ interface AnnotationHandler {
   /**
    * Checks if this instance can apply the styling defined in the [Annotation].
    *
-   * @param annotation The [Annotation] to check if this instance of [AnnotationHandler] can apply
-   *                   styling for
-   *
-   * @return `true` if this [AnnotationHandler] instance can apply styling for the [annotation]
+   * @param annotation The [Annotation] to determine if this [AnnotationHandler] can apply styling
+   * @return `true` if this [AnnotationHandler] instance can apply styling for [annotation]
    */
   fun handles(annotation: Annotation): Boolean
 
@@ -27,7 +25,6 @@ interface AnnotationHandler {
    * @param startIndex The start index (inclusive) in the [builder] to apply styling to
    * @param endIndex The end index (inclusive) in the [builder] to apply styling to
    * @param builder The [AnnotatedString.Builder] to apply styling from the [annotation] to
-   *
    * @return `true` if the styling was applied to the [builder]
    */
   fun apply(

@@ -1,6 +1,7 @@
 package com.devbrackets.android.annores.text.annotation.compat.adapter
 
 import android.text.Annotation
+import android.text.ParcelableSpan
 import android.text.Spanned
 
 /**
@@ -10,13 +11,25 @@ import android.text.Spanned
 interface SpanAdapter {
 
   /**
-   * Converts any Span types supported by the implementing [SpanAdapter]
-   * into [PositionedAnnotation]s.
+   * Checks if this instance can convert [S] into [PositionedAnnotation]s.
    *
-   * @param source The [Spanned] to look for and adapt any supported Spans with
-   * @return A list of the Spans that have been adapted to [PositionedAnnotation]s
+   * @param span The [S] to determine if it can be converted to [PositionedAnnotation]s
+   * @return `true` if this [SpanAdapter] can convert [S] into [PositionedAnnotation]s
    */
-  fun adapt(source: Spanned): List<PositionedAnnotation>
+  fun <S: ParcelableSpan> adapts(span: S): Boolean
+
+  /**
+   * Converts the [span] into a list of [PositionedAnnotation]s. Typically
+   * this conversion process will result in a list of size 1, however there
+   * are cases where a single [ParcelableSpan] will be converted into multiple
+   * [PositionedAnnotation]s.
+   *
+   * @param span The [ParcelableSpan] of [S] to convert to [PositionedAnnotation]s
+   * @param startIndex The start index for the [span]
+   * @param endIndex The end index for the [span]
+   * @return A list of [PositionedAnnotation]s that represent the converted [span]
+   */
+  fun <S: ParcelableSpan> adapt(span: S, startIndex: Int, endIndex: Int): List<PositionedAnnotation>
 
   /**
    * Provides the information necessary to apply the [annotation]

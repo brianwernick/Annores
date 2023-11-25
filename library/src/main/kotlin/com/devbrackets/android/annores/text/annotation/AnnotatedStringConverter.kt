@@ -1,5 +1,7 @@
 package com.devbrackets.android.annores.text.annotation
 
+import android.text.Annotation
+import android.text.ParcelableSpan
 import android.text.Spanned
 import android.text.SpannedString
 import android.util.Log
@@ -15,6 +17,8 @@ import com.devbrackets.android.annores.text.annotation.handler.FontStyleAnnotati
  * Provides the functionality for converting from a [SpannedString] to an [AnnotatedString]
  */
 object AnnotatedStringConverter {
+  private const val LOG_TAG = "AnnotatedStrConverter"
+
   val defaultSpanAdapters = listOf(
     StyleSpanAdapter,
     AnnotationSpanAdapter,
@@ -44,13 +48,20 @@ object AnnotatedStringConverter {
   ): AnnotatedString {
     val destination = AnnotatedString.Builder(source.toString())
 
-    spanAdapters.forEach { adapter ->
-      adapter.adapt(source).forEach { annotation ->
+    source.getSpans(0, source.length, ParcelableSpan::class.java).forEach { span ->
+      val adapter = spanAdapters.firstOrNull { it.adapts(span) }
+      val annotations = adapter?.adapt(span, source.getSpanStart(span), source.getSpanEnd(span))
+
+      annotations?.forEach { annotation ->
         applyAnnotation(
           annotation = annotation,
           destination = destination,
           annotationHandlers = annotationHandlers
         )
+      }
+
+      if (annotations == null) {
+        Log.e(LOG_TAG, "No SpanAdapter found for Span type \"${span::class.simpleName}\"")
       }
     }
 
@@ -79,7 +90,14 @@ object AnnotatedStringConverter {
     }
 
     if (!handled) {
-      Log.w("AnnotatedStrConverter", "No AnnotationHandler handles PositionedAnnotation $annotation")
+      Log.e(LOG_TAG, "No AnnotationHandler found for ${annotation.annotation.displayString()}")
     }
+  }
+
+  /**
+   * Converts the [Annotation] to a string for display in error messages
+   */
+  private fun Annotation.displayString(): String {
+    return "Annotation(key = $key, value = $value)"
   }
 }

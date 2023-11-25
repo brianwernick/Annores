@@ -57,21 +57,25 @@ private fun ScreenContent() {
 
     Sample(
       text = annotatedStringResource(R.string.annotated_simple_defaults),
-      description = "These basic html tags (`<b>` & `<i>`) are supported by default",
+      description = "These basic html tags (`<b>`, `<i>`, & `<u>`) are supported by default",
       modifier = Modifier.fillMaxWidth()
     )
 
     Sample(
       text = annotatedStringResource(
-        R.string.annotated_colors,
+        id = R.string.annotated_colors,
         annotationHandlers = colorHandlers
       ),
-      description = "Adding support for custom annotations is fairly simple with AnnotationHandlers",
+      description = "Adding support for custom annotations is fairly simple with AnnotationHandlers. `<annotation color=#ffff0000></annotation>` in the Red example.",
       modifier = Modifier.fillMaxWidth()
     )
 
     Sample(
-      text = annotatedStringResource(R.string.annotated_with_args, 120, 0.3547128),
+      text = annotatedStringResource(
+        id = R.string.annotated_with_args,
+        120, 0.3547128,
+        annotationHandlers = colorHandlers
+      ),
       description = "Annotations are supported even with string arguments",
       modifier = Modifier.fillMaxWidth()
     )
@@ -83,7 +87,12 @@ private fun ScreenContent() {
     )
 
     Sample(
-      text = annotatedPluralStringResource(R.plurals.annotated_with_args, quantity = 12, 12),
+      text = annotatedPluralStringResource(
+        id = R.plurals.annotated_with_args,
+        quantity = 12,
+        12,
+        annotationHandlers = colorHandlers
+      ),
       description = "Including Plurals with string arguments",
       modifier = Modifier.fillMaxWidth()
     )
