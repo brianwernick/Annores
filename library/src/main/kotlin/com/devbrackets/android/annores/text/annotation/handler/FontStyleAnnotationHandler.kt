@@ -8,20 +8,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 
 /**
- * An [AnnotationHandler] that adds support for a `fontStyle` annotation. This
- * supports the following values:
+ * Supports the `fontStyle` annotation. This supports the following values:
  *   * `normal`
  *   * `bold`
  *   * `italic`
  *   * `underline`
  *   * `strike` (strike through)
  *
- * e.g.
- * ```xml
- *   <string name="styled_annotation"><annotation fontStyle="bold">Bold Text</annotation></string>
- * ```
+ * Multiple values can be added by separating each with a comma (`,`), if multiple conflicting values
+ * are defined the first one will be used; `normal` and `bold` are two such conflicting values.
  *
- * TODO: should we support multiple, e.g. `fontStyle="bold,underline"`?
+ * An example of this annotation in action is:
+ * ```xml
+ *   <string name="styled_annotation"><annotation fontStyle="bold,underline">Bold & Underlined Text</annotation></string>
+ * ```
  */
 object FontStyleAnnotationHandler: AnnotationHandler {
   const val KEY = "fontStyle"
@@ -47,10 +47,11 @@ object FontStyleAnnotationHandler: AnnotationHandler {
       return false
     }
 
+    val values = annotation.value.lowercase().split(",")
     val spanStyle = SpanStyle(
-      fontWeight = determineWeight(annotation.value),
-      fontStyle = determineStyle(annotation.value),
-      textDecoration = determineDecoration(annotation.value)
+      fontWeight = determineWeight(values),
+      fontStyle = determineStyle(values),
+      textDecoration = determineDecoration(values),
     )
 
     builder.addStyle(spanStyle, startIndex, endIndex)
@@ -58,26 +59,32 @@ object FontStyleAnnotationHandler: AnnotationHandler {
     return true
   }
 
-  private fun determineWeight(description: String): FontWeight? {
-    return when(description.lowercase()) {
-      VALUE_NORMAL -> FontWeight.Normal
-      VALUE_BOLD -> FontWeight.Bold
-      else -> null
+  private fun determineWeight(values: List<String>): FontWeight? {
+    return values.firstNotNullOfOrNull { value ->
+      when(value) {
+        VALUE_NORMAL -> FontWeight.Normal
+        VALUE_BOLD -> FontWeight.Bold
+        else -> null
+      }
     }
   }
 
-  private fun determineStyle(description: String): FontStyle? {
-    return when(description.lowercase()) {
-      VALUE_ITALIC -> FontStyle.Italic
-      else -> null
+  private fun determineStyle(values: List<String>): FontStyle? {
+    return values.firstNotNullOfOrNull { value ->
+      when(value) {
+        VALUE_ITALIC -> FontStyle.Italic
+        else -> null
+      }
     }
   }
 
-  private fun determineDecoration(description: String): TextDecoration? {
-    return when(description.lowercase()) {
-      VALUE_UNDERLINE -> TextDecoration.Underline
-      VALUE_STRIKE_THROUGH -> TextDecoration.LineThrough
-      else -> null
+  private fun determineDecoration(values: List<String>): TextDecoration? {
+    return values.firstNotNullOfOrNull { value ->
+      when(value) {
+        VALUE_UNDERLINE -> TextDecoration.Underline
+        VALUE_STRIKE_THROUGH -> TextDecoration.LineThrough
+        else -> null
+      }
     }
   }
 }
