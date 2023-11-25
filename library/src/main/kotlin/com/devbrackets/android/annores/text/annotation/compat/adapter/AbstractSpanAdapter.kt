@@ -1,7 +1,7 @@
 package com.devbrackets.android.annores.text.annotation.compat.adapter
 
 import android.text.ParcelableSpan
-import android.text.Spanned
+import android.util.Log
 import com.devbrackets.android.annores.text.annotation.compat.adapter.SpanAdapter.PositionedAnnotation
 import kotlin.reflect.KClass
 
@@ -12,15 +12,23 @@ import kotlin.reflect.KClass
 abstract class AbstractSpanAdapter<T: ParcelableSpan>(
   protected val spanClass: KClass<T>
 ): SpanAdapter {
-  override fun adapt(source: Spanned): List<PositionedAnnotation> {
-    val spans = source.getSpans(0, source.length, spanClass.java)
+  override fun <S : ParcelableSpan> adapts(span: S): Boolean {
+    return span::class == spanClass
+  }
 
-    return spans.flatMap { span ->
-      val startIndex = source.getSpanStart(span)
-      val endIndex = source.getSpanEnd(span)
-
-      convertSpan(span, startIndex, endIndex)
+  override fun <S : ParcelableSpan> adapt(
+    span: S,
+    startIndex: Int,
+    endIndex: Int
+  ): List<PositionedAnnotation> {
+    if (!adapts(span)) {
+      val methodCallString = "adapt(${span::class.simpleName}, $startIndex, $endIndex)"
+      Log.e("AbstractSpanAdapter", "$methodCallString was called when adapts() returned false")
+      return emptyList()
     }
+
+    @Suppress("UNCHECKED_CAST")
+    return convertSpan(span as T, startIndex, endIndex)
   }
 
   /**
@@ -37,6 +45,6 @@ abstract class AbstractSpanAdapter<T: ParcelableSpan>(
   abstract fun convertSpan(
     span: T,
     startIndex: Int,
-    endIndex: Int,
+    endIndex: Int
   ): List<PositionedAnnotation>
 }

@@ -13,6 +13,8 @@ import androidx.compose.ui.text.style.TextDecoration
  *   * `normal`
  *   * `bold`
  *   * `italic`
+ *   * `underline`
+ *   * `strike` (strike through)
  *
  * e.g.
  * ```xml
@@ -29,7 +31,7 @@ object FontStyleAnnotationHandler: AnnotationHandler {
   const val VALUE_ITALIC = "italic"
 
   const val VALUE_UNDERLINE = "underline"
-  const val VALUE_STRIKE_THROUGH = "strikeThrough"
+  const val VALUE_STRIKE_THROUGH = "strike"
 
   override fun handles(annotation: Annotation): Boolean {
     return annotation.key.equals(KEY, true)
