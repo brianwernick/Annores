@@ -2,7 +2,7 @@
   <string name="app_name">Annores Demo</string>
 
   <!-- AnnotatedStringScreen -->
-  <string name="annotated_simple_defaults">Annotated strings can be <b>Bold</b>, <i>Italic</i>, or <b><i>Bold &amp; Italic</i></b></string>
+  <string name="annotated_simple_defaults">Annotated strings can be <b>Bold</b>, <i>Italic</i>, or <u>Underlined</u></string>
   <string name="annotated_colors">Custom AnnotationHandlers can support things like colors, e.g.: <annotation color="#ffff0000"><b>Red</b></annotation>, <annotation color="#ff00ff00"><b>Green</b></annotation>, &amp; <annotation color="#ff0000ff"><b>Blue</b></annotation></string>
   <string name="annotated_with_args">Placeholders are also filled with args such as
     <annotation color="#ff3fcf7f"><b>Count = %1$d </b></annotation>

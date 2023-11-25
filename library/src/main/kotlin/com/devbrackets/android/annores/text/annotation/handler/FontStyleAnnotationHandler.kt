@@ -5,6 +5,7 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 
 /**
  * An [AnnotationHandler] that adds support for a `fontStyle` annotation. This
@@ -17,6 +18,8 @@ import androidx.compose.ui.text.font.FontWeight
  * ```xml
  *   <string name="styled_annotation"><annotation fontStyle="bold">Bold Text</annotation></string>
  * ```
+ *
+ * TODO: should we support multiple, e.g. `fontStyle="bold,underline"`?
  */
 object FontStyleAnnotationHandler: AnnotationHandler {
   const val KEY = "fontStyle"
@@ -24,6 +27,9 @@ object FontStyleAnnotationHandler: AnnotationHandler {
   const val VALUE_NORMAL = "normal"
   const val VALUE_BOLD = "bold"
   const val VALUE_ITALIC = "italic"
+
+  const val VALUE_UNDERLINE = "underline"
+  const val VALUE_STRIKE_THROUGH = "strikeThrough"
 
   override fun handles(annotation: Annotation): Boolean {
     return annotation.key.equals(KEY, true)
@@ -41,7 +47,8 @@ object FontStyleAnnotationHandler: AnnotationHandler {
 
     val spanStyle = SpanStyle(
       fontWeight = determineWeight(annotation.value),
-      fontStyle = determineStyle(annotation.value)
+      fontStyle = determineStyle(annotation.value),
+      textDecoration = determineDecoration(annotation.value)
     )
 
     builder.addStyle(spanStyle, startIndex, endIndex)
@@ -60,6 +67,14 @@ object FontStyleAnnotationHandler: AnnotationHandler {
   private fun determineStyle(description: String): FontStyle? {
     return when(description.lowercase()) {
       VALUE_ITALIC -> FontStyle.Italic
+      else -> null
+    }
+  }
+
+  private fun determineDecoration(description: String): TextDecoration? {
+    return when(description.lowercase()) {
+      VALUE_UNDERLINE -> TextDecoration.Underline
+      VALUE_STRIKE_THROUGH -> TextDecoration.LineThrough
       else -> null
     }
   }
