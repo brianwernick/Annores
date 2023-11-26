@@ -110,6 +110,25 @@ class FontStyleAnnotationHandlerTest {
     }
   }
 
+  @Test
+  fun applyMultiple() {
+    // Given
+    val styles = listOf(FontStyleAnnotationHandler.VALUE_BOLD, FontStyleAnnotationHandler.VALUE_ITALIC)
+    val annotation = Annotation(FontStyleAnnotationHandler.KEY, styles.joinToString(separator = ","))
+    val builder = AnnotatedString.Builder("The text")
+
+    // When
+    val actual = FontStyleAnnotationHandler.apply(annotation, 0, 8, builder)
+    val annotatedString = builder.toAnnotatedString()
+
+    // Then
+    Assert.assertTrue(actual)
+    annotatedString.assertSpanStyle(0, 0, 8) {
+      Assert.assertEquals(FontWeight.Bold, it.fontWeight)
+      Assert.assertEquals(FontStyle.Italic, it.fontStyle)
+    }
+  }
+
   private fun AnnotatedString.assertSpanStyle(
     spanIndex: Int,
     startIndex: Int,

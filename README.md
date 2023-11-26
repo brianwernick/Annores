@@ -1,13 +1,21 @@
 ![Maven Central](https://img.shields.io/maven-central/v/com.devbrackets.android/annores)
 
-Annores
-============
-Annores, from Annotated Resource, provides the ability to retrieve AnnotatedStrings from
+## Annores
+Annores, from **Anno**tated **Res**ource, provides the ability to retrieve `AnnotatedString`s from
 resources through simple Composable functions.
 
 
-Use
--------
+# Why
+Android `Resources` provides the ability to get a string that is formatted or a string that
+is styled, however there are 2 issues with this:
+1. When you get a styled string, it's a `Spanned` which isn't usable by Jetpack Compose
+2. You can't get a string that is both formatted & styled
+
+Annores addresses both of these issues by first converting the styled `Spanned` to an `AnnotatedString`
+which is usable by Composables then extending this conversion to handle formatting
+
+
+# Use
 The latest version can be included from [Maven Central][Maven Central].
 
 ```gradle
@@ -22,8 +30,7 @@ dependencies {
 ```
 
 
-Quick Start
--------
+# Quick Start
 Annotated strings should be added to your `strings.xml` files the same way you add any other string
 or plural resource, e.g.
 
@@ -42,8 +49,7 @@ fun AnAnnotatedComposable() {
 }
 ```
 
-License
--------
+# License
 
     Copyright 2023 Brian Wernick
 
@@ -60,8 +66,7 @@ License
     limitations under the License.
 
 
-Attribution
------------
+# Attribution
 * Uses [Kotlin][Kotlin] licensed under [Apache 2.0][Apache 2.0]
 * Uses [Compose][Compose] licensed under [Apache 2.0][Apache 2.0]
 
