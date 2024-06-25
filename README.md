@@ -25,7 +25,7 @@ repositories {
 
 dependencies {
     //...
-    implementation 'com.devbrackets.android:annores:1.0.0'
+    implementation 'com.devbrackets.android:annores:1.0.1'
 }
 ```
 
@@ -51,7 +51,7 @@ fun AnAnnotatedComposable() {
 
 # License
 
-    Copyright 2023 Brian Wernick
+    Copyright 2024 Brian Wernick
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
