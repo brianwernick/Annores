@@ -73,10 +73,16 @@ object SpannedFormatter {
     formatArgs: Array<out Any>
   ): SpannableStringBuilder {
     val state = FormatState(locale, formatArgs)
+    var startIndex = 0
 
-    FORMAT_REGEX.findAll(this, 0).forEach { match ->
-      replace(state, match)
-    }
+    // Manually iterate over the matches for 2 reasons:
+    // 1. The `FORMAT_REGEX.findAll()` wasn't correctly capturing all cases (e.g. %1$d%% only caught the first match)
+    // 2. Use the `startIndex` so that a replacement of another format doesn't work (e.g. %d -> %d) since that would cause a cycle
+    do {
+      val match = FORMAT_REGEX.find(this, startIndex)?.also {
+        startIndex = replace(state, it)
+      }
+    } while (match != null)
 
     return this
   }
@@ -87,12 +93,14 @@ object SpannedFormatter {
    *
    * @param state The [FormatState] to use for replacing the format placeholder from [match]
    * @param match The [MatchResult] holding a match from the [FORMAT_REGEX] which should be replaced
+   *
+   * @return The end index of the replacement
    */
   @Suppress("MoveVariableDeclarationIntoWhen")
   private fun SpannableStringBuilder.replace(
     state: FormatState,
     match: MatchResult
-  ) {
+  ): Int {
     val argIndex = match.groupValues[1]
     val format = match.groupValues[2]
     val conversion = match.groupValues[3]
@@ -104,6 +112,7 @@ object SpannedFormatter {
     }
 
     replace(match.range.first, match.range.last + 1, replacementValue)
+    return match.range.first + replacementValue.length
   }
 
   /**
