@@ -46,6 +46,19 @@ class SpannedFormatterTest {
   }
 
   @Test
+  fun formatPercentReplacement() {
+    // Given
+    val locale = Locale("en", "us")
+    val spanned = SpannedString("%1\$d%%")
+
+    // When
+    val actual = SpannedFormatter.format(locale, spanned, 25)
+
+    // Then
+    Assert.assertEquals("25%", actual.toString())
+  }
+
+  @Test
   fun formatNewLine() {
     // Given
     val locale = Locale("en", "us")
