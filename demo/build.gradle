@@ -4,14 +4,14 @@ apply plugin: 'kotlin-android'
 dependencies {
   implementation project(':library')
 
-  implementation 'androidx.appcompat:appcompat:1.6.1'
+  implementation 'androidx.appcompat:appcompat:1.7.0'
 
-  implementation 'androidx.activity:activity-compose:1.8.1'
-  implementation "androidx.compose.material:material:1.5.4"
-  debugImplementation "androidx.compose.ui:ui-tooling:1.5.4"
+  implementation 'androidx.activity:activity-compose:1.9.0'
+  implementation "androidx.compose.material:material:1.6.8"
+  debugImplementation "androidx.compose.ui:ui-tooling:1.6.8"
 
-  implementation "androidx.navigation:navigation-compose:2.7.5"
-  implementation "com.google.accompanist:accompanist-navigation-animation:0.32.0"
+  implementation "androidx.navigation:navigation-compose:2.7.7"
+  implementation "com.google.accompanist:accompanist-navigation-animation:0.34.0"
 }
 
 android {
@@ -36,7 +36,7 @@ android {
   }
 
   composeOptions {
-    kotlinCompilerExtensionVersion '1.5.4'
+    kotlinCompilerExtensionVersion '1.5.14'
   }
 
   sourceSets {
