@@ -1,46 +1,50 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
+plugins {
+  alias libs.plugins.android.application
+  alias libs.plugins.kotlin.android
+  alias libs.plugins.compose.compiler
+}
 
 dependencies {
   implementation project(':library')
+  // Misc
+  implementation libs.appcompat
 
-  implementation 'androidx.appcompat:appcompat:1.7.0'
-
-  implementation 'androidx.activity:activity-compose:1.9.0'
-  implementation "androidx.compose.material:material:1.6.8"
-  debugImplementation "androidx.compose.ui:ui-tooling:1.6.8"
-
-  implementation "androidx.navigation:navigation-compose:2.7.7"
-  implementation "com.google.accompanist:accompanist-navigation-animation:0.34.0"
+  implementation libs.ui.tooling
+  implementation libs.ui.tooling.preview
+  implementation libs.material
+  implementation libs.material.icons.core
+  implementation libs.activity.compose
+  implementation libs.navigation.compose
 }
 
 android {
   namespace 'com.devbrackets.android.annoresdemo'
 
-  compileSdk 34
+  compileSdk 35
 
   defaultConfig {
     applicationId "com.devbrackets.android.annoresdemo"
     minSdkVersion 21
-    targetSdkVersion 34
+    targetSdkVersion 35
     versionCode 1
     versionName "1.0"
   }
 
-  kotlinOptions {
-    jvmTarget = JavaVersion.VERSION_1_8
+  sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
   }
 
   buildFeatures {
     compose true
   }
 
-  composeOptions {
-    kotlinCompilerExtensionVersion '1.5.14'
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_11
+    targetCompatibility JavaVersion.VERSION_11
   }
 
-  sourceSets {
-    main.java.srcDirs += 'src/main/kotlin'
+  kotlinOptions {
+    jvmTarget = JavaVersion.VERSION_11
   }
 
   lint {

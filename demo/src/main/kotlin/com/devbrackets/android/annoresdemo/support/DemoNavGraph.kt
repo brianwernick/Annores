@@ -1,14 +1,13 @@
 package com.devbrackets.android.annoresdemo.support
 
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.devbrackets.android.annoresdemo.sample.string.AnnotatedStringScreen
 import com.devbrackets.android.annoresdemo.support.theme.DemoTheme
-import com.google.accompanist.navigation.animation.composable
-import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 
 enum class DemoDestination(
   val route: String
@@ -17,9 +16,8 @@ enum class DemoDestination(
 }
 
 @Composable
-@OptIn(ExperimentalAnimationApi::class)
 fun DemoNavGraph() {
-  val navController = rememberAnimatedNavController()
+  val navController = rememberNavController()
 
   DemoTheme {
     DemoNavHost(
