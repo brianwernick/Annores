@@ -2,7 +2,9 @@ package com.devbrackets.android.annoresdemo.support
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.statusBars
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
@@ -33,7 +35,9 @@ fun SimpleScaffold(
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold
           )
-        }
+        },
+        contentColor = DemoTheme.colors.text05,
+        windowInsets = WindowInsets.statusBars
       )
     },
     content = content

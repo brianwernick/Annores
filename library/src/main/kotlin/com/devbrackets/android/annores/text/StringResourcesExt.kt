@@ -36,6 +36,7 @@ fun annotatedStringResource(
 ): AnnotatedString {
   val text = LocalContext.current.resources.getText(id)
   if (text !is Spanned) {
+    // TODO: it seems that in Compose previews this is never a Spanned, it's always a String
     return AnnotatedString(text.toString())
   }
 

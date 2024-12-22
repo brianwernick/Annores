@@ -1,5 +1,8 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
+plugins {
+  alias libs.plugins.android.library
+  alias libs.plugins.kotlin.android
+  alias libs.plugins.compose.compiler
+}
 
 afterEvaluate {
   apply from: '../gradle/release/publish.gradle'
@@ -7,39 +10,40 @@ afterEvaluate {
 
 dependencies {
   // Kotlin
-  api "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+  api libs.kotlin.stdlib.jdk7
 
   // Compose
-  api "androidx.compose.ui:ui:1.6.8"
+  api libs.ui
 
   // Tests
-  testImplementation "junit:junit:4.13.2"
-  testImplementation "org.robolectric:robolectric:4.10.3"
+  testImplementation libs.junit
+  testImplementation libs.robolectric
 }
 
 android {
   namespace 'com.devbrackets.android.annores'
 
-  compileSdk 34
+  compileSdk 35
   defaultConfig {
     minSdkVersion 21
-    targetSdkVersion 34
+    targetSdkVersion 35
   }
 
-  kotlinOptions {
-    jvmTarget = JavaVersion.VERSION_1_8
+  sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
   }
 
   buildFeatures {
     compose true
   }
 
-  composeOptions {
-    kotlinCompilerExtensionVersion '1.5.14'
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_11
+    targetCompatibility JavaVersion.VERSION_11
   }
 
-  sourceSets {
-    main.java.srcDirs += 'src/main/kotlin'
+  kotlinOptions {
+    jvmTarget = JavaVersion.VERSION_11
   }
 
   lint {
