@@ -1,14 +1,13 @@
 [versions]
-activityCompose = "1.9.3"
-androidGradlePlugin = "8.7.3"
-appcompat = "1.7.0"
+activityCompose = "1.10.1"
+androidGradlePlugin = "8.12.0"
+appcompat = "1.7.1"
 junit = "4.13.2"
-kotlin = "2.0.20"
-material = "1.7.6"
-navigationCompose = "2.8.5"
-nexusPublish = "1.1.0"
-robolectric = "4.13"
-composeUi = "1.7.6"
+kotlin = "2.2.10"
+navigationCompose = "2.9.3"
+nexusPublish = "2.0.0"
+robolectric = "4.15.1"
+composeUi = "1.9.0"
 
 [libraries]
 activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
@@ -17,8 +16,8 @@ appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat"
 junit = { module = "junit:junit", version.ref = "junit" }
 kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-stdlib-jdk7 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk7", version.ref = "kotlin" }
-material = { module = "androidx.compose.material:material", version.ref = "material" }
-material-icons-core = { module = "androidx.compose.material:material-icons-core", version.ref = "material" }
+material = { module = "androidx.compose.material:material", version = "1.9.0" }
+material-icons-core = { module = "androidx.compose.material:material-icons-core", version = "1.7.8" }
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
 ui = { module = "androidx.compose.ui:ui", version.ref = "composeUi" }
@@ -31,4 +30,5 @@ android-library = { id = "com.android.library", version.ref = "androidGradlePlug
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 nexus-publish = { id = "io.github.gradle-nexus.publish-plugin", version.ref = "nexusPublish" }
-
+maven-publish = { id = "maven-publish" }
+signing = { id = "signing" }

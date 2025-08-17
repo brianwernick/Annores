@@ -6,7 +6,7 @@
   <string name="annotated_colors">Custom AnnotationHandlers can support things like colors, e.g.: <annotation color="#ffff0000"><b>Red</b></annotation>, <annotation color="#ff00ff00"><b>Green</b></annotation>, &amp; <annotation color="#ff0000ff"><b>Blue</b></annotation></string>
   <string name="annotated_with_args">Placeholders are also filled with args such as
     <annotation color="#ff3f9faf"><b>Count = %1$d </b></annotation>
-    and as a <annotation color="#ff3f9faf"><b>Percent = %2$.4f %%</b></annotation>
+    and as a <annotation color="#ff3f9faf"><b>Percent = %2$.4f%%</b></annotation>
   </string>
 
   <plurals name="annotated_simple_defaults">

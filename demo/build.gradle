@@ -6,9 +6,8 @@ plugins {
 
 dependencies {
   implementation project(':library')
-  // Misc
-  implementation libs.appcompat
 
+  implementation libs.appcompat
   implementation libs.ui.tooling
   implementation libs.ui.tooling.preview
   implementation libs.material
@@ -20,12 +19,12 @@ dependencies {
 android {
   namespace 'com.devbrackets.android.annoresdemo'
 
-  compileSdk 35
+  compileSdk = 36
 
   defaultConfig {
     applicationId "com.devbrackets.android.annoresdemo"
     minSdkVersion 21
-    targetSdkVersion 35
+    targetSdkVersion 36
     versionCode 1
     versionName "1.0"
   }
