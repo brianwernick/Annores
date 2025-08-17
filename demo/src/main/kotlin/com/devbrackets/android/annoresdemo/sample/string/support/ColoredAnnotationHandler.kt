@@ -35,7 +35,7 @@ object ColoredAnnotationHandler: AnnotationHandler {
 
     val color = try {
       annotation.value.toColorInt()
-    } catch (e: IllegalArgumentException) {
+    } catch (_: IllegalArgumentException) {
       return false
     }
 

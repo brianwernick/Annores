@@ -7,7 +7,7 @@ import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.text.AnnotatedString
 import com.devbrackets.android.annores.text.annotation.AnnotatedStringConverter
 import com.devbrackets.android.annores.text.annotation.compat.adapter.SpanAdapter
@@ -34,9 +34,8 @@ fun annotatedStringResource(
   spanAdapters: List<SpanAdapter> = AnnotatedStringConverter.defaultSpanAdapters,
   annotationHandlers: List<AnnotationHandler> = AnnotatedStringConverter.defaultAnnotationHandlers
 ): AnnotatedString {
-  val text = LocalContext.current.resources.getText(id)
+  val text = LocalResources.current.getText(id)
   if (text !is Spanned) {
-    // TODO: it seems that in Compose previews this is never a Spanned, it's always a String
     return AnnotatedString(text.toString())
   }
 
@@ -68,7 +67,7 @@ fun annotatedStringResource(
   spanAdapters: List<SpanAdapter> = AnnotatedStringConverter.defaultSpanAdapters,
   annotationHandlers: List<AnnotationHandler> = AnnotatedStringConverter.defaultAnnotationHandlers
 ): AnnotatedString {
-  val resources = LocalContext.current.resources
+  val resources = LocalResources.current
   val text = resources.getText(id)
   if (text !is Spanned) {
     return AnnotatedString(resources.getString(id, *formatArgs))
@@ -102,7 +101,7 @@ fun annotatedPluralStringResource(
   spanAdapters: List<SpanAdapter> = AnnotatedStringConverter.defaultSpanAdapters,
   annotationHandlers: List<AnnotationHandler> = AnnotatedStringConverter.defaultAnnotationHandlers
 ): AnnotatedString {
-  val text = LocalContext.current.resources.getQuantityText(id, quantity)
+  val text = LocalResources.current.getQuantityText(id, quantity)
   if (text !is Spanned) {
     return AnnotatedString(text.toString())
   }
@@ -137,7 +136,7 @@ fun annotatedPluralStringResource(
   spanAdapters: List<SpanAdapter> = AnnotatedStringConverter.defaultSpanAdapters,
   annotationHandlers: List<AnnotationHandler> = AnnotatedStringConverter.defaultAnnotationHandlers
 ): AnnotatedString {
-  val resources = LocalContext.current.resources
+  val resources = LocalResources.current
   val text = resources.getQuantityText(id, quantity)
   if (text !is Spanned) {
     return AnnotatedString(resources.getQuantityString(id, quantity, *formatArgs))

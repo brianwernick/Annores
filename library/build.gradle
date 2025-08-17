@@ -2,6 +2,8 @@ plugins {
   alias libs.plugins.android.library
   alias libs.plugins.kotlin.android
   alias libs.plugins.compose.compiler
+  alias libs.plugins.maven.publish
+  alias libs.plugins.signing
 }
 
 afterEvaluate {
@@ -23,10 +25,10 @@ dependencies {
 android {
   namespace 'com.devbrackets.android.annores'
 
-  compileSdk 35
+  compileSdk = 36
   defaultConfig {
     minSdkVersion 21
-    targetSdkVersion 35
+    targetSdkVersion 36
   }
 
   sourceSets {
@@ -52,6 +54,6 @@ android {
 }
 
 // Disables javadoc because it fails on kotlin files
-tasks.withType(Javadoc).all {
+tasks.withType(Javadoc).configureEach {
   enabled = false
 }
