@@ -19,12 +19,12 @@ dependencies {
 android {
   namespace 'com.devbrackets.android.annoresdemo'
 
-  compileSdk = 36
+  compileSdk = 37
 
   defaultConfig {
     applicationId "com.devbrackets.android.annoresdemo"
-    minSdkVersion 21
-    targetSdkVersion 36
+    minSdkVersion 23
+    targetSdkVersion 37
     versionCode 1
     versionName "1.0"
   }

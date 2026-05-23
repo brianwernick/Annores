@@ -17,6 +17,7 @@ import java.util.Locale
 
 @Config(manifest = Config.NONE)
 @RunWith(RobolectricTestRunner::class)
+@Suppress("CanConvertToMultiDollarString")
 class SpannedFormatterTest {
 
   @Test
