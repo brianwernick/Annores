@@ -51,7 +51,7 @@ fun AnAnnotatedComposable() {
 
 # License
 
-    Copyright 2024 Brian Wernick
+    Copyright 2026 Brian Wernick
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

@@ -2,9 +2,9 @@
 
 ###### Include the following:
  - Library version: `1.0.0`
- - Device OS version: `13`
+ - Device OS version: `16`
  - Device Manufacturer: `Google`
- - Device Name: `Pixel 8`
+ - Device Name: `Pixel 10`
  
 ###### Reproduction Steps
  0.  
