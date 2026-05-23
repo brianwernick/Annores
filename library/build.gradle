@@ -25,10 +25,9 @@ dependencies {
 android {
   namespace 'com.devbrackets.android.annores'
 
-  compileSdk = 36
+  compileSdk = 37
   defaultConfig {
-    minSdkVersion 21
-    targetSdkVersion 36
+    minSdkVersion 23
   }
 
   sourceSets {
@@ -50,6 +49,11 @@ android {
 
   lint {
     abortOnError false
+    targetSdk 37
+  }
+
+  testOptions {
+    targetSdk 37
   }
 }
 
