@@ -23,7 +23,7 @@ class SpannedFormatterTest {
   @Test
   fun formatNothing() {
     // Given
-    val locale = Locale("en", "us")
+    val locale = getLocale()
     val spanned = SpannedString("A string")
 
     // When
@@ -36,7 +36,7 @@ class SpannedFormatterTest {
   @Test
   fun formatPercent() {
     // Given
-    val locale = Locale("en", "us")
+    val locale = getLocale()
     val spanned = SpannedString("A string %%")
 
     // When
@@ -49,7 +49,7 @@ class SpannedFormatterTest {
   @Test
   fun formatPercentReplacement() {
     // Given
-    val locale = Locale("en", "us")
+    val locale = getLocale()
     val spanned = SpannedString("%1\$d%%")
 
     // When
@@ -62,7 +62,7 @@ class SpannedFormatterTest {
   @Test
   fun formatNewLine() {
     // Given
-    val locale = Locale("en", "us")
+    val locale = getLocale()
     val spanned = SpannedString("A%nstring")
 
     // When
@@ -75,7 +75,7 @@ class SpannedFormatterTest {
   @Test
   fun formatSimplePlaceholder() {
     // Given
-    val locale = Locale("en", "us")
+    val locale = getLocale()
     val spanned = SpannedString("A placeholder for %s")
 
     // When
@@ -88,7 +88,7 @@ class SpannedFormatterTest {
   @Test
   fun formatPositionalPlaceholder() {
     // Given
-    val locale = Locale("en", "us")
+    val locale = getLocale()
     val spanned = SpannedString("A placeholder for %1\$s")
 
     // When
@@ -101,7 +101,7 @@ class SpannedFormatterTest {
   @Test
   fun formatIncorrectPositionalPlaceholder() {
     // Given
-    val locale = Locale("en", "us")
+    val locale = getLocale()
     val spanned = SpannedString("A placeholder for %2\$s")
 
     // When / Then
@@ -113,7 +113,7 @@ class SpannedFormatterTest {
   @Test
   fun formatPositionalPlaceholders() {
     // Given
-    val locale = Locale("en", "us")
+    val locale = getLocale()
     val spanned = SpannedString("A placeholder for %2\$s and %1\$s")
 
     // When
@@ -126,7 +126,7 @@ class SpannedFormatterTest {
   @Test
   fun formatRelativePlaceholders() {
     // Given
-    val locale = Locale("en", "us")
+    val locale = getLocale()
     val spanned = SpannedString("A placeholder for %s and %<s")
 
     // When
@@ -139,7 +139,7 @@ class SpannedFormatterTest {
   @Test
   fun formatIncorrectRelativePlaceholder() {
     // Given
-    val locale = Locale("en", "us")
+    val locale = getLocale()
     val spanned = SpannedString("A placeholder for %<s")
 
     // When / Then
@@ -151,20 +151,20 @@ class SpannedFormatterTest {
   @Test
   fun formatPlaceholderWithDecimals() {
     // Given
-    val locale = Locale("en", "us")
+    val locale = getLocale()
     val spanned = SpannedString("A placeholder for %.2f")
 
     // When
     val actual = SpannedFormatter.format(locale, spanned, 0.1234)
 
     // Then
-    Assert.assertEquals(actual.toString(), "A placeholder for 0.12")
+    Assert.assertEquals("A placeholder for 0.12", actual.toString())
   }
 
   @Test
   fun formatSimplePlaceholderWithSpan() {
     // Given
-    val locale = Locale("en", "us")
+    val locale = getLocale()
     val originalSpanned = SpannableStringBuilder("A placeholder %s").apply {
       // Bold "%s"
       setSpan(StyleSpan(Typeface.BOLD), 14, 16, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
@@ -183,7 +183,7 @@ class SpannedFormatterTest {
   @Test
   fun formatSimplePlaceholderWithNestedSpans() {
     // Given
-    val locale = Locale("en", "us")
+    val locale = getLocale()
     val originalSpanned = SpannableStringBuilder("A placeholder %s").apply {
       // Bold "%s"
       setSpan(StyleSpan(Typeface.BOLD), 14, 16, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
@@ -204,7 +204,7 @@ class SpannedFormatterTest {
   @Test
   fun formatSimplePlaceholderWithMultipleSpans() {
     // Given
-    val locale = Locale("en", "us")
+    val locale = getLocale()
     val originalSpanned = SpannableStringBuilder("A %s placeholder with %s").apply {
       // Bold first "%s"
       setSpan(StyleSpan(Typeface.BOLD), 2, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
@@ -247,5 +247,15 @@ class SpannedFormatterTest {
     Assert.assertEquals("Expected an end index of $endIndex, found $actualEnd", endIndex, actualEnd)
 
     additionalAssertion(span as T)
+  }
+
+  private fun getLocale(
+    language: String = "en",
+    country: String = "us",
+  ): Locale {
+      return Locale.Builder().apply {
+        setLanguage(language)
+        setRegion(country)
+      }.build()
   }
 }
