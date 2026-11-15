@@ -1,6 +1,5 @@
 package com.devbrackets.android.annores.text
 
-import android.os.Build
 import android.text.Spanned
 import androidx.annotation.PluralsRes
 import androidx.annotation.StringRes
@@ -155,10 +154,5 @@ fun annotatedPluralStringResource(
 @Composable
 @ReadOnlyComposable
 private fun primaryLocale(): Locale {
-  return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-    LocalConfiguration.current.locales[0]
-  } else {
-    @Suppress("DEPRECATION")
-    LocalConfiguration.current.locale
-  }
+  return LocalConfiguration.current.locales[0]
 }
